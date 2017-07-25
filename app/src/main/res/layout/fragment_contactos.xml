@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.contactos.sin.sincontactos.ContactosFragment"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/telefono"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/title_text_size"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/titulo"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/text_text_size"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/cantidad"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/text_text_size"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnRestaurar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Restaurar Contactos"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorAccent"
+        android:textColor="@android:color/white"/>
+
+</LinearLayout>

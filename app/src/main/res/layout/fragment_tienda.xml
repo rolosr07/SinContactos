@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.contactos.sin.sincontactos.TiendaFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_tienda_page"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/title_tienda"
+                android:textSize="@dimen/text_text_size"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/logo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/ubicacion"
+                android:textSize="@dimen/text_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/telefono"
+                android:textSize="@dimen/text_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/email"
+                android:textSize="@dimen/text_text_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/web"
+                android:textSize="@dimen/text_text_size"/>
+        </LinearLayout>
+
+    </ScrollView>
+</FrameLayout>

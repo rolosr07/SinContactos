@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Sin Contactos</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Telefono</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Ingresar</string>
+    <string name="action_sign_in_short">Acceso Sin Contactos</string>
+    <string name="error_invalid_email">Telefono es inalido</string>
+    <string name="error_invalid_password">La contraseña es muy corta</string>
+    <string name="error_incorrect_password">La contraseña es incorrecta</string>
+    <string name="error_field_required">Esta valor es requerido</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_main">Sin Contactos</string>
+    <string name="title_home">Cuentas</string>
+    <string name="title_dashboard">Contactos</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_tienda">Tienda</string>
+    <string name="title_tienda_page">El Comercial asignado es: </string>
+    <string name="hello_blank_fragment_cuenta">Hello Cuenta fragment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_agregar_cuenta">Agregar Nueva Cuenta</string>
+    <string name="error_server">Error al enviar la información al servidor.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

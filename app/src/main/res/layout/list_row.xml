@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/list_selector"
+android:orientation="horizontal"
+android:padding="5dip" >
+
+<!--  ListRow Left sied Thumbnail image -->
+<LinearLayout android:id="@+id/thumbnail"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="3dip"
+    android:layout_alignParentLeft="true"
+    android:background="@drawable/image_bg"
+    android:layout_marginRight="5dip">
+
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="50dip"
+        android:layout_height="50dip"/>
+
+</LinearLayout>
+
+<!-- Title Of Song-->
+<TextView
+    android:id="@+id/nombreCuenta"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignTop="@+id/thumbnail"
+    android:layout_toRightOf="@+id/thumbnail"
+    android:text="Facebook"
+    android:textColor="#040404"
+    android:typeface="sans"
+    android:textSize="15dip"
+    android:textStyle="bold"/>
+
+<!-- Artist Name -->
+<TextView
+    android:id="@+id/cuenta"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/nombreCuenta"
+    android:textColor="#343434"
+    android:textSize="13dip"
+    android:layout_marginTop="1dip"
+    android:layout_toRightOf="@+id/thumbnail"
+    android:text="Correo:" />
+
+<TextView
+    android:id="@+id/pass"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/cuenta"
+    android:textColor="#343434"
+    android:textSize="13dip"
+    android:layout_marginTop="1dip"
+    android:layout_toRightOf="@+id/thumbnail"
+    android:text="Contraseña:" />
+
+<!-- Rightend Arrow -->
+<ImageView android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:src="@drawable/fecha"
+    android:layout_alignParentRight="true"
+    android:layout_centerVertical="true"
+    android:visibility="visible"/>
+
+</RelativeLayout>
