@@ -87,6 +87,12 @@ public class LoginActivity extends Base {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if(getCurrentUser()!=null){
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            finish();
+            startActivity(i);
+        }
+
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);

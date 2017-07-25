@@ -31,7 +31,8 @@ import com.google.android.gms.gcm.PeriodicTask;
 public class MainActivity extends Base implements CuentasFragment.OnFragmentInteractionListener,
                                                   TiendaFragment.OnFragmentInteractionListener,
                                                   AgregarCuentaFragment.OnFragmentInteractionListener,
-                                                  ContactosFragment.OnFragmentInteractionListener{
+                                                  ContactosFragment.OnFragmentInteractionListener
+                                                  {
     private TextView mTextMessage;
     private String nombre = "";
 
@@ -109,12 +110,13 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        CuentasFragment fragment = new CuentasFragment();
-
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment, fragment, "Cuentas");
-        ft.commit();
-
+        try {
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, new CuentasFragment(), "Cuentas");
+            ft.commit();
+        }catch (Exception ex){
+            ex.getMessage();
+        }
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
         textProgress = (TextView) findViewById(R.id.textProgress);
@@ -184,7 +186,7 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri){
+    public void onFragmentInteractionCuentas(Uri uri){
         //you can leave it empty
     }
 

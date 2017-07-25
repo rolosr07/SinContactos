@@ -1,25 +1,25 @@
 package com.contactos.sin.sincontactos;
 
 import android.content.Context;
+
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import java.lang.reflect.Type;
+import java.util.List;
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-
+import android.os.Handler;
 import com.contactos.sin.sincontactos.common.adapter.LazyAdapter;
 import com.contactos.sin.sincontactos.common.entidades.Cuenta;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.ksoap2.SoapEnvelope;
@@ -27,10 +27,6 @@ import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -64,7 +60,6 @@ public class CuentasFragment extends Fragment {
     private Handler handler = new Handler();
     private Type collectionTypeCuenta = new TypeToken<List<Cuenta>>(){}.getType();
     private static  MainActivity activity;
-
     public CuentasFragment() {
         // Required empty public constructor
 
@@ -109,7 +104,7 @@ public class CuentasFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 activity.setCurrentFragment(1);
-                final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                final FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment, new AgregarCuentaFragment(), "AgregarCuenta");
                 ft.commit();
             }
@@ -126,12 +121,13 @@ public class CuentasFragment extends Fragment {
         }
 
         return v;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteractionCuentas(uri);
         }
     }
 
@@ -164,7 +160,7 @@ public class CuentasFragment extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteractionCuentas(Uri uri);
     }
 
     public void loadCuentasList(final int idUsuario){

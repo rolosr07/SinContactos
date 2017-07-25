@@ -4,44 +4,40 @@
     android:layout_height="match_parent"
     tools:context="com.contactos.sin.sincontactos.CuentasFragment">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:orientation="vertical">
+            android:divider="#b5b5b5"
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/list_selector"
+            android:scrollbars="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="-55dp"
+            android:layout_gravity="center"
+            android:gravity="center">
 
-            <ListView
-                android:id="@+id/list"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:divider="#b5b5b5"
-                android:dividerHeight="1dp"
-                android:listSelector="@drawable/list_selector"
-                android:scrollbars="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="-55dp"
-                android:layout_gravity="center"
-                android:gravity="center">
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/fab"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:clickable="true"
-                    android:src="@mipmap/addaccount"
-                    android:scaleType="center"
-                    android:layout_marginLeft="250dp"
-                    android:layout_gravity="right"/>
-            </LinearLayout>
-
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:clickable="true"
+                android:src="@mipmap/addaccount"
+                android:scaleType="center"
+                android:layout_marginLeft="250dp"
+                android:layout_gravity="right"/>
         </LinearLayout>
-
-
-
+    </LinearLayout>
 </FrameLayout>

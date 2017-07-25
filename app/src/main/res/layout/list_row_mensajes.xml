@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/list_selector"
+android:orientation="vertical"
+android:padding="5dip" >
+
+
+<TextView
+    android:id="@+id/nombreCuenta"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Tiene un mensaje de su tienda"
+    android:textColor="@android:color/white"
+    android:typeface="sans"
+    android:textSize="@dimen/title_text_size"
+    android:textStyle="bold"
+    android:background="@color/colorAccent"
+    android:layout_gravity="center"
+    android:gravity="center"/>
+
+<!-- Artist Name -->
+<TextView
+    android:id="@+id/texto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/nombreCuenta"
+    android:textColor="#343434"
+    android:textSize="@dimen/text_text_size"
+    android:layout_marginTop="10dip"
+    android:text="" />
+
+</LinearLayout>
