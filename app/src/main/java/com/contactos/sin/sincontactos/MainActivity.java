@@ -3,7 +3,6 @@ package com.contactos.sin.sincontactos;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +31,8 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
                                                   TiendaFragment.OnFragmentInteractionListener,
                                                   AgregarCuentaFragment.OnFragmentInteractionListener,
                                                   ContactosFragment.OnFragmentInteractionListener,
-                                                  MensajesFragment.OnFragmentInteractionListener{
+                                                  MensajesFragment.OnFragmentInteractionListener,
+                                                  VerMensajeFragment.OnFragmentInteractionListener{
     private TextView mTextMessage;
     private String nombre = "";
 
@@ -113,9 +113,16 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         try {
-            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment, new CuentasFragment(), "Cuentas");
-            ft.commit();
+            Bundle b = getIntent().getExtras();
+            if(getIntent().getExtras()!= null && getIntent().getBooleanExtra("APP_ES_NOTIFICACION",false)){
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment, new MensajesFragment(), "Mensajes");
+                ft.commit();
+            }else{
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment, new CuentasFragment(), "Cuentas");
+                ft.commit();
+            }
         }catch (Exception ex){
             ex.getMessage();
         }
@@ -127,13 +134,13 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
         mGcmNetworkManager = GcmNetworkManager.getInstance(this);
         // [END get_gcm_network_manager]
 
-        // BroadcastReceiver to get information from MyTaskService about task completion.
+        // BroadcastReceiver to get information from ContactosTaskService about task completion.
         mReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getAction().equals(MyTaskService.ACTION_DONE)) {
-                    String tag = intent.getStringExtra(MyTaskService.EXTRA_TAG);
-                    int result = intent.getIntExtra(MyTaskService.EXTRA_RESULT, -1);
+                if (intent.getAction().equals(ContactosTaskService.ACTION_DONE)) {
+                    String tag = intent.getStringExtra(ContactosTaskService.EXTRA_TAG);
+                    int result = intent.getIntExtra(ContactosTaskService.EXTRA_RESULT, -1);
 
                     //String msg = String.format("DONE: %s (%d)", tag, result);
                     //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
@@ -143,10 +150,9 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
 
         checkPlayServicesAvailable();
 
-        if(!isMyServiceRunning(MyTaskService.class))
-        {
-            startPeriodicTask();
-        }
+        IniciarTareaRespaldoDeUsuarios();
+        IniciarTareaLecturaNotificaciones();
+
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -209,6 +215,11 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
             final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, new CuentasFragment(), "Cuentas");
             ft.commit();
+        }else if(getCurrentFragment() == 2){
+            setCurrentFragment(0);
+            final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, new MensajesFragment(), "Mensajes");
+            ft.commit();
         }else{
             super.onBackPressed();
         }
@@ -225,7 +236,7 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
         super.onStart();
 
         IntentFilter filter = new IntentFilter();
-        filter.addAction(MyTaskService.ACTION_DONE);
+        filter.addAction(ContactosTaskService.ACTION_DONE);
 
         LocalBroadcastManager manager = LocalBroadcastManager.getInstance(this);
         manager.registerReceiver(mReceiver, filter);
@@ -239,18 +250,18 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
        // manager.unregisterReceiver(mReceiver);
 
         // For the purposes of this sample, cancel all tasks when the app is stopped.
-        //mGcmNetworkManager.cancelAllTasks(MyTaskService.class);
+        //mGcmNetworkManager.cancelAllTasks(ContactosTaskService.class);
     }
 
-    public void startPeriodicTask() {
-        Log.d(TAG, "startPeriodicTask");
+    public void IniciarTareaRespaldoDeUsuarios() {
+        Log.d(TAG, "IniciarTareaRespaldoDeUsuarios");
 
         // [START start_periodic_task]
         // 86400000L
         PeriodicTask task = new PeriodicTask.Builder()
-                .setService(MyTaskService.class)
+                .setService(ContactosTaskService.class)
                 .setTag(TASK_TAG_PERIODIC)
-                .setPeriod(86400000L)
+                .setPeriod(86400L)
                 .build();
 
         mGcmNetworkManager.schedule(task);
@@ -258,12 +269,21 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
         // [END start_periodic_task]
     }
 
-    public void stopPeriodicTask() {
-        Log.d(TAG, "stopPeriodicTask");
+    public void IniciarTareaLecturaNotificaciones() {
 
-        // [START stop_periodic_task]
-        mGcmNetworkManager.cancelTask(TASK_TAG_PERIODIC, MyTaskService.class);
-        // [END stop_per
+        Log.d(TAG, "IniciarTareaRespaldoDeUsuarios");
+
+        // [START start_periodic_task]
+        // 86400000L
+        PeriodicTask task = new PeriodicTask.Builder()
+                .setService(MensajesTaskService.class)
+                .setTag(TASK_TAG_PERIODIC)
+                .setPeriod(3600L)
+                .build();
+
+        mGcmNetworkManager.schedule(task);
+
+        // [END start_periodic_task]
     }
 
     private void checkPlayServicesAvailable() {
@@ -281,16 +301,6 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
         }
     }
 
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public boolean isCargarCuentas() {
         return cargarCuentas;
     }
@@ -301,6 +311,11 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
 
     @Override
     public void onFragmentInteractionMensajes(Uri uri) {
+
+    }
+
+    @Override
+    public void onFragmentInteractionVerMensajes(Uri uri) {
 
     }
 }

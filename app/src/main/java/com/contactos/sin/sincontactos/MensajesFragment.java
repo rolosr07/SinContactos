@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -189,7 +190,7 @@ public class MensajesFragment extends Fragment {
 
                             activity.setCurrentFragment(2);
 
-                            Fragment fragment = new AgregarCuentaFragment();
+                            Fragment fragment = new VerMensajeFragment();
                             Bundle bundle = new Bundle();
                             Mensaje mensaje = (Mensaje) adapterList.getItem(position);
                             bundle.putInt("idmensaje", mensaje.getIdmensaje());
@@ -198,9 +199,9 @@ public class MensajesFragment extends Fragment {
                             bundle.putString("fecha", mensaje.getFecha());
                             fragment.setArguments(bundle);
 
-                            /*final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                            final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                             ft.replace(R.id.fragment, fragment, "VerMensaje");
-                            ft.commit();*/
+                            ft.commit();
                         }
                     });
                 }
