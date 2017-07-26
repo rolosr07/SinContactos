@@ -69,6 +69,7 @@ public class LoginActivity extends Base {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private TextView textProgress;
     private ImageView logo;
 
     private final String METHOD_NAME = "loginCliente";
@@ -120,6 +121,7 @@ public class LoginActivity extends Base {
         logo = (ImageView) findViewById(R.id.logo);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        textProgress = (TextView) findViewById(R.id.textProgress);
 
         if(!getSharedPreferences().getString("TIENDA_APP","").equals(""))
         {
@@ -129,7 +131,7 @@ public class LoginActivity extends Base {
             logo.setImageBitmap(decodedByte);
 
         }else{
-            showProgress(true);
+            showProgress(true, "Cargando tiendas..");
             loadLogo();
         }
 
@@ -173,7 +175,7 @@ public class LoginActivity extends Base {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            showProgress(true, "Validando sus datos..");
             login(email,password);
         }
     }
@@ -189,7 +191,7 @@ public class LoginActivity extends Base {
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
+    private void showProgress(final boolean show, final String text) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
@@ -197,6 +199,8 @@ public class LoginActivity extends Base {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            textProgress.setVisibility(show ? View.VISIBLE : View.GONE);
+            textProgress.setText(text);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
@@ -218,6 +222,8 @@ public class LoginActivity extends Base {
             // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            textProgress.setText(text);
+            textProgress.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -265,14 +271,14 @@ public class LoginActivity extends Base {
 
                 getSharedPreferences().edit().putString("USER_DATA", webResponse).apply();
 
-                showProgress(false);
+                showProgress(false,"");
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 finish();
                 startActivity(i);
 
             }else{
-                //userNameView.setError(getString(R.string.error_invalid_email));
-                showProgress(false);
+                mEmailView.setError(getString(R.string.error_invalid_email));
+                showProgress(false,"");
             }
         }
     };
@@ -327,9 +333,9 @@ public class LoginActivity extends Base {
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 logo.setImageBitmap(decodedByte);
 
-                showProgress(false);
+                showProgress(false,"");
             }else{
-                showProgress(false);
+                showProgress(false,"");
             }
         }
     };
