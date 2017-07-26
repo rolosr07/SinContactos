@@ -31,8 +31,8 @@ import com.google.android.gms.gcm.PeriodicTask;
 public class MainActivity extends Base implements CuentasFragment.OnFragmentInteractionListener,
                                                   TiendaFragment.OnFragmentInteractionListener,
                                                   AgregarCuentaFragment.OnFragmentInteractionListener,
-                                                  ContactosFragment.OnFragmentInteractionListener
-                                                  {
+                                                  ContactosFragment.OnFragmentInteractionListener,
+                                                  MensajesFragment.OnFragmentInteractionListener{
     private TextView mTextMessage;
     private String nombre = "";
 
@@ -69,6 +69,8 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
                     ft.commit();
                     return true;
                 case R.id.navigation_notifications:
+                    ft.replace(R.id.fragment, new MensajesFragment(), "Mensajes");
+                    ft.commit();
                     return true;
                 case R.id.navigation_tienda:
                     ft.replace(R.id.fragment, new TiendaFragment(), "Tienda");
@@ -295,5 +297,10 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
 
     public void setCargarCuentas(boolean cargarCuentas) {
         this.cargarCuentas = cargarCuentas;
+    }
+
+    @Override
+    public void onFragmentInteractionMensajes(Uri uri) {
+
     }
 }
