@@ -114,6 +114,8 @@ public class LoginActivity extends Base {
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mEmailView.getWindowToken(), 0);
                 attemptLogin();
             }
         });
@@ -131,7 +133,7 @@ public class LoginActivity extends Base {
             logo.setImageBitmap(decodedByte);
 
         }else{
-            showProgress(true, "Cargando tiendas..");
+            showProgress(true, "Cargando información de la tienda..");
             loadLogo();
         }
 
