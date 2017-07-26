@@ -254,7 +254,7 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
     }
 
     public void IniciarTareaRespaldoDeUsuarios() {
-        Log.d(TAG, "IniciarTareaRespaldoDeUsuarios");
+        //Log.d(TAG, "IniciarTareaRespaldoDeUsuarios");
 
         // [START start_periodic_task]
         // 86400000L
@@ -271,7 +271,7 @@ public class MainActivity extends Base implements CuentasFragment.OnFragmentInte
 
     public void IniciarTareaLecturaNotificaciones() {
 
-        Log.d(TAG, "IniciarTareaRespaldoDeUsuarios");
+        //Log.d(TAG, "IniciarTareaRespaldoDeUsuarios");
 
         // [START start_periodic_task]
         // 86400000L

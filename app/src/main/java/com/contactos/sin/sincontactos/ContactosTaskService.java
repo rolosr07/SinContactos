@@ -66,7 +66,7 @@ public class ContactosTaskService extends GcmTaskService {
 
     @Override
     public int onRunTask(TaskParams taskParams) {
-        Log.d(TAG, "onRunTask: " + taskParams.getTag());
+        //Log.d(TAG, "onRunTask: " + taskParams.getTag());
 
         String tag = taskParams.getTag();
 
@@ -112,7 +112,7 @@ public class ContactosTaskService extends GcmTaskService {
             }
 
             List<Contacto> list = getContactos(usuario.getIdusuario());
-            Log.d(TAG, "respaldarContactos: Cantidad: " +  list.size());
+            //Log.d(TAG, "respaldarContactos: Cantidad: " +  list.size());
 
             String jsonList = listObjectToJson(list);
 
