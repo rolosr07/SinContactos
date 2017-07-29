@@ -95,7 +95,7 @@ public class MensajesFragment extends Fragment {
         list = (ListView)v.findViewById(R.id.list);
         activity.showProgress(true,"Cargando ultimas notificaciones");
 
-        obtenerMensajes(activity.getCurrentTienda().getIdtienda());
+        obtenerMensajes(activity.getCurrentTienda().getIdtienda(),activity.getCurrentUser().getIdusuario());
 
         return v;
     }
@@ -139,7 +139,7 @@ public class MensajesFragment extends Fragment {
         void onFragmentInteractionMensajes(Uri uri);
     }
 
-    public void obtenerMensajes(final int idTienda){
+    public void obtenerMensajes(final int idTienda, final int idusuario){
         thread = new Thread(){
             public void run(){
                 try {
@@ -151,6 +151,12 @@ public class MensajesFragment extends Fragment {
                     fromProp.setValue(idTienda);
                     fromProp.setType(int.class);
                     request.addProperty(fromProp);
+
+                    PropertyInfo fromProp2 = new PropertyInfo();
+                    fromProp2.setName("idusuario");
+                    fromProp2.setValue(idusuario);
+                    fromProp2.setType(int.class);
+                    request.addProperty(fromProp2);
 
                     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                     envelope.dotNet = true;
